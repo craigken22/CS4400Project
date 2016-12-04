@@ -13,5 +13,26 @@ SELECT	u.username,
 		JOIN LKP_MAJORS m ON u.major = m.major
 	WHERE u.username = '' AND u.password = ''
 	
-SELECT	
-		
+SELECT major
+     FROM LKP_MAJORS
+     WHERE department = dept
+	 
+SELECT category
+     FROM LKP_CATEGORIES;
+	 
+SELECT year
+     FROM LKP_YEARS;
+	 
+SELECT designation
+     FROM LKP_DESIGNATIONS;
+	 
+SELECT username,
+         project_name,
+         status
+     FROM BRG_APPLICATIONS;
+	 
+SELECT username,
+         project_name,
+         status
+     FROM BRG_APPLICATIONS;
+	 

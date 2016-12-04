@@ -18,7 +18,7 @@ public class Connector {
     private Connection con;
     private Statement  stmt;
     private ResultSet  rs;
-    
+
     public Connector() {
         con = null;
         try {
@@ -38,7 +38,7 @@ public class Connector {
             } catch(SQLException e) {}
         }
     }
-    
+
     public ResultSet getResults(String sql) throws SQLException {
     	Statement stmt = null;
     	ResultSet ResSet = null;
@@ -52,8 +52,8 @@ public class Connector {
 				stmt.close();
 			}
 		}
-    	
-    	
+
+
         return ResSet;
     }
 }

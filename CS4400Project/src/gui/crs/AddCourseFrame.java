@@ -7,6 +7,7 @@ package gui.crs;
 
 import conn.Connector;
 import dat.Lookups;
+import dat.UserProfile;
 import gui.lgn.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -57,9 +58,11 @@ public class AddCourseFrame extends JFrame {
                             yearReqs,
                             deptReqs;
     private Connector       con;
+    private UserProfile     profile;
     
-    public AddCourseFrame(Connector con) {
+    public AddCourseFrame(Connector con, UserProfile profile) {
         this.con = con;
+        this.profile = profile;
         setTitle("Add a Course");
         buildPane();
         pack();
@@ -187,7 +190,7 @@ public class AddCourseFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Open Register Frame.
-            new RegisterFrame();
+            new RegisterFrame(con);
             dispose();
         }
     }

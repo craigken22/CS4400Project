@@ -5,14 +5,23 @@
  */
 package gui.lgn;
 
+import conn.Connector;
+import dat.UserProfile;
+import dat.obj.User;
+import gui.MainPageFrame;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -31,12 +40,29 @@ public class LoginFrame extends JFrame {
     private JTextField      usernameField;
     private JPasswordField  passwordField;
     private ImageIcon       buzzImage;
+    private Connector       con;
     
     public LoginFrame() {
         setTitle("Login");
         buildPane();
         pack();
         setVisible(true);
+        
+        
+        con = new Connector();
+        
+    }
+    
+    public LoginFrame(Connector con) {
+        this.con = con;
+        setTitle("Login");
+        buildPane();
+        pack();
+        setVisible(true);
+        
+        
+        
+        
     }
     
     private void buildPane() {
@@ -128,18 +154,71 @@ public class LoginFrame extends JFrame {
     private class LoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String username = usernameField.getText();
+            String username;
+            char[] pw;
             String password;
-            
-            if (username != null) {
-                if (!username.isEmpty()) {
+            try {
+                username = usernameField.getText();
+                pw = passwordField.getPassword();
+                password = "";
+            } catch (NullPointerException ex) {
+                username = null;
+                pw = null;
+                password = null;
+            }
+            if (username != null && pw != null) {
+                username = username.replaceAll("'", "''");
+                for (int i = 0; i < pw.length; i++) {
+                    password = password + pw[i];
+                }
+                password = password.replaceAll("'", "''");
+                if (!username.isEmpty() && !password.isEmpty()) {
+                    String sql = "SELECT	u.username,\n" +
+"		u.password,\n" +
+"		u.user_type,\n" +
+"		u.major,\n" +
+"		m.department,\n" +
+"		u.year,\n" +
+"		u.email_address\n" +
+"	FROM STD_USERS u\n" +
+"		JOIN LKP_MAJORS m ON u.major = m.major\n" +
+"	WHERE u.username = '"+username+"' AND u.password = '"+password+"'";
                     
-                    dispose();
+                    ResultSet rs = con.getResults(sql);
+                    
+                    try {
+                        if (rs.next()) {
+                            User user = new User(
+                                                    rs.getString(1),
+                                                    rs.getString(2),
+                                                    rs.getString(3),
+                                                    rs.getString(4),
+                                                    rs.getString(5),
+                                                    rs.getString(6),
+                                                    rs.getString(7)
+                                                );
+                            UserProfile profile = new UserProfile(user);
+                            new MainPageFrame(con, profile);
+                            dispose();
+                            
+                        }
+                    } catch (SQLException ex) {
+                        //Connection error.  Login failed.
+                        
+                    }
                 } else {
-                    //Password empty
+                    //Username or Password empty
+                    JOptionPane.showMessageDialog(null, 
+                            "Username and Password cannot be empty.  Please try again.", 
+                            "Empty Username or Password",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             } else {
                 //Error
+                JOptionPane.showMessageDialog(null, 
+                        "Username and Password cannot be empty.  Please try again.", 
+                        "Empty Username or Password",
+                        JOptionPane.WARNING_MESSAGE);
             }
             
         }
@@ -149,7 +228,7 @@ public class LoginFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Open Register Frame.
-            new RegisterFrame();
+            new RegisterFrame(con);
             dispose();
         }
     }

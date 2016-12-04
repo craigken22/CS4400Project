@@ -23,7 +23,7 @@ import javax.swing.JTextField;
  *
  * @author Kenneth Craig
  */
-public class MainPage extends JPanel {
+public class MainPageFrame extends JPanel {
     private JLabel                  meLabel,
                                     mainPageLabel,
                                     titleLabel,
@@ -50,7 +50,7 @@ public class MainPage extends JPanel {
     private Connector               con;
     private UserProfile             profile;
     
-    public MainPage(UserProfile profile, Connector con) {
+    public MainPageFrame(Connector con, UserProfile profile) {
         this.profile = profile;
         this.con = con;
         

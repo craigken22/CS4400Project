@@ -7,6 +7,8 @@ package gui.prj;
 
 import conn.Connector;
 import dat.Lookups;
+import dat.UserProfile;
+import gui.adm.ChooseFunctFrame;
 import gui.lgn.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -59,9 +61,11 @@ public class AddProjectFrame extends JFrame {
                             yearReqs,
                             deptReqs;
     private Connector       con;
+    private UserProfile     profile;
     
-    public AddProjectFrame(Connector con) {
+    public AddProjectFrame(Connector con, UserProfile profile) {
         this.con = con;
+        this.profile = profile;
         setTitle("Add a Project");
         buildPane();
         pack();
@@ -188,8 +192,8 @@ public class AddProjectFrame extends JFrame {
     private class BackListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Open Register Frame.
-            new RegisterFrame();
+            //Open Choose Funct Frame.
+            new ChooseFunctFrame(con, profile);
             dispose();
         }
     }

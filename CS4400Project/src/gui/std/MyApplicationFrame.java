@@ -5,6 +5,8 @@
  */
 package gui.std;
 
+import conn.Connector;
+import dat.UserProfile;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,9 +25,13 @@ public class MyApplicationFrame extends JFrame {
     private JLabel          applicationLabel;
     private JButton         backButton;
     private JTable          table;
+    private Connector       con;
+    private UserProfile     profile;
     
     
-    public MyApplicationFrame() {
+    public MyApplicationFrame(Connector con, UserProfile profile) {
+        this.con = con;
+        this.profile = profile;
         setTitle("My Application");
         buildPane();
         pack();
@@ -79,6 +85,7 @@ public class MyApplicationFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 //            new RegisterFrame();
+            new MeFrame(con, profile);
             dispose();
         }
     }

@@ -5,8 +5,11 @@
  */
 package gui.crs;
 
+import conn.Connector;
+import dat.UserProfile;
 import dat.obj.Course;
 import dat.obj.Project;
+import gui.adm.ChooseFunctFrame;
 import gui.lgn.RegisterFrame;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -27,8 +30,12 @@ public class ViewCourseFrame extends JFrame {
     private JTextArea       descriptionArea;
     private JButton         backButton;
     private Course          course;
+    private Connector       con;
+    private UserProfile     profile;
     
-    public ViewCourseFrame() {
+    public ViewCourseFrame(Connector con, UserProfile profile) {
+        this.con = con;
+        this.profile = profile;
         setTitle(course.getCourseName());
         buildPane();
         pack();
@@ -100,7 +107,7 @@ public class ViewCourseFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Open Register Frame.
-            new RegisterFrame();
+            new ChooseFunctFrame(con, profile);
             dispose();
         }
     }

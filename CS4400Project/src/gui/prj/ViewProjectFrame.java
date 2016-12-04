@@ -5,6 +5,8 @@
  */
 package gui.prj;
 
+import conn.Connector;
+import dat.UserProfile;
 import dat.obj.Project;
 import gui.lgn.RegisterFrame;
 import java.awt.FlowLayout;
@@ -27,9 +29,13 @@ public class ViewProjectFrame extends JFrame {
     private JButton         backButton,
                             applyButton;
     private Project         project;
+    private Connector       con;
+    private UserProfile     profile;
     
-    public ViewProjectFrame() {
-        setTitle("Login");
+    public ViewProjectFrame(Connector con, UserProfile profile) {
+        this.con = con;
+        this.profile = profile;
+        setTitle("Project");
         buildPane();
         pack();
         setVisible(true);
@@ -106,7 +112,7 @@ public class ViewProjectFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Open Register Frame.
-            new RegisterFrame();
+            new RegisterFrame(con);
             dispose();
         }
     }

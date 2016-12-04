@@ -23,8 +23,8 @@ public class Connector {
         con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection("jdbc:mysql://academicmysql.cc.gatech.edu/cs6310_team3_p3",
-                    " cs6310_team3_p3", "secret");
+            con = DriverManager.getConnection("jdbc:mysql://academic-mysql.cc.gatech.edu",
+                    " cs4400_Team_31", "1vakj0D9");
             if(!con.isClosed())
                 System.out.println("Successfully connected to " +
                                         "MySQL server using TCP/IP...");
@@ -40,6 +40,11 @@ public class Connector {
     }
     
     public ResultSet getResults(String sql) {
-        return null;
+        try {
+            rs = stmt.executeQuery(sql);
+        } catch(Exception conExcept) {
+            
+        }
+        return rs;
     }
 }

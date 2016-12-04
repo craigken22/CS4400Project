@@ -5,6 +5,7 @@
  */
 package gui.lgn;
 
+import conn.Connector;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,8 +33,10 @@ public class RegisterFrame extends JFrame {
                             emailField;
     private JPasswordField  passwordField,
                             confirmField;
+    private Connector       con;
     
-    public RegisterFrame() {
+    public RegisterFrame(Connector con) {
+        this.con = con;
         setTitle("New Student Registration");
         buildPane();
         pack();
@@ -142,15 +145,36 @@ public class RegisterFrame extends JFrame {
     private class CreateListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String username = usernameField.getText();
+            String username;
+            String email;
+            char[] pw;
+            char[] pw2;
             String password;
+            String password2;
+            
+            try {
+                username = usernameField.getText();
+                email = emailField.getText();
+                pw = passwordField.getPassword();
+                pw2 = confirmField.getPassword();
+                password = "";
+                password2 = "";
+            } catch (NullPointerException ex) {
+                username = null;
+                email = null;
+                pw = null;
+                pw2 = null;
+                password = null;
+                password2 = null;
+            }
             
             if (username != null) {
                 if (!username.isEmpty()) {
-                    
+                    new LoginFrame(con);
                     dispose();
                 } else {
-                    //Password empty
+                    //Fields empty
+                    
                 }
             } else {
                 //Error

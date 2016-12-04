@@ -8,6 +8,7 @@ package gui.std;
 import gui.std.EditProfileFrame;
 import conn.Connector;
 import dat.UserProfile;
+import gui.MainPageFrame;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,6 +94,7 @@ public class MeFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 //            new RegisterFrame();
+            new MainPageFrame(con, profile);
             dispose();
         }
     }
@@ -111,6 +113,7 @@ public class MeFrame extends JFrame {
         public void mouseClicked(MouseEvent e) {
             //Open Register Frame.
 //            new RegisterFrame();
+            new MyApplicationFrame(con, profile);
             dispose();
         }
     }

@@ -6,6 +6,8 @@
 package gui.adm;
 
 import conn.Connector;
+import dat.UserProfile;
+import gui.lgn.LoginFrame;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -29,11 +31,13 @@ public class ChooseFunctFrame extends JFrame {
                             viewAppReportLabel,
                             addProjectLabel,
                             addCourseLabel;
-    private JButton         backButton;
+    private JButton         logOutButton;
     private Connector       con;
+    private UserProfile     profile;
     
-    public ChooseFunctFrame(Connector con) {
+    public ChooseFunctFrame(Connector con, UserProfile profile) {
         this.con = con;
+        this.profile = profile;
         setTitle("My Profile");
         buildPane();
         pack();
@@ -52,8 +56,8 @@ public class ChooseFunctFrame extends JFrame {
         viewProjReportLabel = new JLabel("<html><font color='blue'><u>My Application</u></font></html>");
         viewProjReportLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
-        backButton = new JButton("Back");
-        backButton.addActionListener(new BackListener());
+        logOutButton = new JButton("Log Out");
+        logOutButton.addActionListener(new LogOutListener());
     }
     
     private void addToPane() {
@@ -81,7 +85,7 @@ public class ChooseFunctFrame extends JFrame {
         panels[2].add(viewProjReportLabel);
         
         //Panel 3
-        panels[3].add(backButton);
+        panels[3].add(logOutButton);
         
         //Add to main panel
         mainPanel.add(panels[0]);
@@ -91,10 +95,11 @@ public class ChooseFunctFrame extends JFrame {
         this.add(mainPanel);
     }
     
-    private class BackListener implements ActionListener {
+    private class LogOutListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 //            new RegisterFrame();
+            new LoginFrame(con);
             dispose();
         }
     }

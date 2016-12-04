@@ -6,6 +6,7 @@
 package gui.prj;
 
 import conn.Connector;
+import dat.UserProfile;
 import gui.adm.ChooseFunctFrame;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -29,10 +30,11 @@ public class ProjectsReportFrame extends JFrame {
     private JButton         backButton;
     private JTable          table;
     private Connector       con;
+    private UserProfile     profile;
     
-    
-    public ProjectsReportFrame(Connector con) {
+    public ProjectsReportFrame(Connector con, UserProfile profile) {
         this.con = con;
+        this.profile = profile;
         setTitle("Popular Project");
         buildPane();
         pack();
@@ -83,7 +85,7 @@ public class ProjectsReportFrame extends JFrame {
     private class BackListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new ChooseFunctFrame(con);
+            new ChooseFunctFrame(con, profile);
             dispose();
         }
     }

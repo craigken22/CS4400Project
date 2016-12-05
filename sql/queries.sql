@@ -10,7 +10,7 @@ SELECT	u.username,
 		u.year,
 		u.email_address
 	FROM STD_USERS u
-		JOIN LKP_MAJORS m ON u.major = m.major
+		LEFT OUTER JOIN LKP_MAJORS m ON u.major = m.major
 	WHERE u.username = '' AND u.password = ''
 
 (SELECT 'Please Select')

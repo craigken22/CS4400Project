@@ -113,13 +113,13 @@ SELECT 	DATE_FORMAT(appl_date, %Y/%m/%d),
 (SELECT u.course_name, 'Course'
 		FROM STD_COURSES u
 			JOIN BRG_COURSES_TO_CATEGORIES c ON u.course_num = c.course_num
-		WHERE u.course_name = '' AND u.designation = '' AND c.category = '')
+		WHERE u.course_name = '' AND u.designation = '' AND (c.category = '' OR c.category = ''))
 UNION
 (SELECT u.project_name, 'Project'
 		FROM STD_PROJECTS p
 			JOIN BRG_PROJECTS_TO_CATEGORIES c ON p.project_name = c.project_name
 		WHERE u.project_name = '' AND u.designation = '' AND
-			u.major_restriction = '' AND u.year_restriction = '' AND c.category = '')
+			u.major_restriction = '' AND u.year_restriction = '' AND u.dept_restriction = '' AND (c.category = '' OR c.category = ''))
 
 -- View Projects of interest
 SELECT p.project_name,

@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/gui/MainPage.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/conn/Connector.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/dat/obj/Course.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/dat/UserProfile.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/dat/fltr/MainPageFilter.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/dat/Lookups.java</file>
-            <file>file:/C:/Users/Kenneth%20Craig/Documents/NetBeansProjects/CS4400Project/src/gui/LoginFrame.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

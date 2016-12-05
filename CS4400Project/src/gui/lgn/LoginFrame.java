@@ -6,6 +6,7 @@
 package gui.lgn;
 
 import conn.Connector;
+import dat.Lookups;
 import dat.UserProfile;
 import dat.obj.User;
 import gui.MainPageFrame;
@@ -50,7 +51,6 @@ public class LoginFrame extends JFrame {
         
         
         con = new Connector();
-        
     }
     
     public LoginFrame(Connector con) {
@@ -183,7 +183,7 @@ public class LoginFrame extends JFrame {
 "	FROM STD_USERS u\n" +
 "		JOIN LKP_MAJORS m ON u.major = m.major\n" +
 "	WHERE u.username = '"+username+"' AND u.password = '"+password+"'";
-                    
+                    System.out.println(sql);
                     ResultSet rs = con.getResults(sql);
                     
                     try {
@@ -197,12 +197,12 @@ public class LoginFrame extends JFrame {
                                                     rs.getString(6),
                                                     rs.getString(7)
                                                 );
+                    System.out.println(user.getUsername());
                             UserProfile profile = new UserProfile(user);
                             new MainPageFrame(con, profile);
                             dispose();
-                            
                         }
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         //Connection error.  Login failed.
                         
                     }

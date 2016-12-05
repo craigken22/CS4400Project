@@ -9,6 +9,8 @@ import conn.Connector;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,12 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import util.Utilities;
 
 /**
  *
  * @author Kenneth Craig
  */
 public class RegisterFrame extends JFrame {
+    
     private JLabel          registerLabel,
                             usernameLabel,
                             emailLabel,
@@ -168,10 +172,39 @@ public class RegisterFrame extends JFrame {
                 password2 = null;
             }
             
-            if (username != null) {
-                if (!username.isEmpty()) {
-                    new LoginFrame(con);
-                    dispose();
+            if (username != null && email != null
+                        && pw != null && pw2 != null) {
+                
+                
+                username = username.replaceAll("'", "''");
+                email = email.replaceAll("'", "''");
+                for (int i = 0; i < pw.length; i++) {
+                    password = password + pw[i];
+                }
+                password = password.replaceAll("'", "''");
+                for (int i = 0; i < pw2.length; i++) {
+                    password2 = password2 + pw2[i];
+                }
+                password2 = password2.replaceAll("'", "''");
+                
+                if (!username.isEmpty() && !email.isEmpty() 
+                        && !password.isEmpty() && !password2.isEmpty()) {
+                    if (password.equals(password2)) {
+                        if (Utilities.validate(email)) {
+                            String sql = "INSERT INTO 'STD_USERS'\n" +
+"				(username, user_type, password, major, year, email_address)\n" +
+"		VALUES\n" +
+"				('"+username+"', 'STUDENT', '"+password+"', 'Computer Science', 'Freshman', '"+email+"')";
+                            System.out.println(sql);
+                            con.execute(sql);
+                            new LoginFrame(con);
+                            dispose();
+                        } else {
+                            //Email invalid.
+                        }
+                    } else {
+                        //Passwords don't match.
+                    }
                 } else {
                     //Fields empty
                     

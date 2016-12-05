@@ -6,49 +6,113 @@
 package dat;
 
 import conn.Connector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Kenneth Craig
  */
 public class Lookups {
-    public static String[] getDesignations(Connector con, boolean forFilter) {
+    public static Object[] getDesignations(Connector con, boolean forFilter) {
         ArrayList<String> designations = new ArrayList();
-        String sql = "";
+        String sql = "SELECT designation\n" +
+"     FROM LKP_DESIGNATIONS;";
         
         if (forFilter) {
             designations.add("Please Select");
         }
         
+        ResultSet rs = con.getResults(sql);
         
+        try {
+            while (rs.next()) {
+                designations.add(rs.getString(1));
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            
+        }
         
-        return (String[])(designations.toArray());
+        return (designations.toArray());
     }
-    public static String[] getCategories(Connector con) {
+    public static Object[] getCategories(Connector con) {
         ArrayList<String> designations = new ArrayList();
-        String sql = "";
+        String sql = "SELECT category\n" +
+"     FROM LKP_CATEGORIES;";
         
         
         
+        ResultSet rs = con.getResults(sql);
         
-        
-        return (String[])(designations.toArray());
+        try {
+            while (rs.next()) {
+                designations.add(rs.getString(1));
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            
+        }
+        return (designations.toArray());
     }
-    public static String[] getMajors(Connector con) {
+    public static Object[] getMajors(Connector con, String dept) {
         ArrayList<String> designations = new ArrayList();
-        String sql = "";
+        String sql = "SELECT major\n" +
+"     FROM LKP_MAJORS\n" +
+"     WHERE department = '" + dept + "'";
         
         
         
-        return (String[])(designations.toArray());
+        ResultSet rs = con.getResults(sql);
+        
+        try {
+            while (rs.next()) {
+                designations.add(rs.getString(1));
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            
+        }
+        return (designations.toArray());
     }
-    public static String[] getYears(Connector con) {
+    public static Object[] getMajors(Connector con) {
         ArrayList<String> designations = new ArrayList();
-        String sql = "";
+        String sql = "SELECT major\n" +
+"     FROM LKP_MAJORS";
         
         
         
-        return (String[])(designations.toArray());
+        ResultSet rs = con.getResults(sql);
+        
+        try {
+            while (rs.next()) {
+                designations.add(rs.getString(1));
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            
+        }
+        return (designations.toArray());
+    }
+    public static Object[] getYears(Connector con) {
+        ArrayList<String> designations = new ArrayList();
+        String sql = "SELECT year FROM LKP_YEARS";
+        
+        
+        
+        ResultSet rs = con.getResults(sql);
+        
+        try {
+            while (rs.next()) {
+                designations.add(rs.getString(1));
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            
+        }
+        return (designations.toArray());
     }
 }

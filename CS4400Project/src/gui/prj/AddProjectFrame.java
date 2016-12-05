@@ -55,7 +55,7 @@ public class AddProjectFrame extends JFrame {
                             majorReqBox,
                             yearReqBox,
                             deptReqBox;
-    private String[]        categories,
+    private Object[]        categories,
                             designations,
                             majorReqs,
                             yearReqs,

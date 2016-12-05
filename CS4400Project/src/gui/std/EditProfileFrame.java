@@ -32,7 +32,7 @@ public class EditProfileFrame extends JFrame {
     private JButton         backButton;
     private JComboBox       majorBox,
                             yearBox;
-    private String[]        majors,
+    private Object[]        majors,
                             years;
     private Connector       con;
     private UserProfile     profile;

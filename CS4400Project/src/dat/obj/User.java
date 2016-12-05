@@ -20,8 +20,8 @@ public class User {
     
     public User (
                     String username,
-                    String userType,
                     String password,
+                    String userType,
                     String major,
                     String department,
                     String year,

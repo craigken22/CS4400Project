@@ -182,7 +182,7 @@ public class LoginFrame extends JFrame {
 "		u.year,\n" +
 "		u.email_address\n" +
 "	FROM STD_USERS u\n" +
-"		LEFT OUTER JOIN LKP_MAJORS m ON u.major = m.major\n" +
+"		JOIN LKP_MAJORS m ON u.major = m.major\n" +
 "	WHERE u.username = '"+username+"' AND u.password = '"+password+"'";
                     System.out.println(sql);
                     ResultSet rs = con.getResults(sql);

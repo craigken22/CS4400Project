@@ -210,9 +210,15 @@ public class MainPageFrame extends JFrame {
         panels[0].add(subPanels[0]);
         panels[0].add(subPanels[1]);
         //Panel 1
-        subPanels[0].add(meLabel);
-        subPanels[0].add(mainPageLabel);
-        panels[1].add(subPanels[0]);
+        subPanels[2].add(titleLabel);
+        subPanels[3].add(titleField);
+        subPanels[3].add(categoryLabel);
+        subPanels[3].add(categoryBoxes.get(0));
+        subPanels[3].add(addCategoryLabel);
+        panels[1].add(subPanels[2]);
+        panels[1].add(subPanels[3]);
+        panels[1].add(subPanels[4]);
+        panels[1].add(subPanels[5]);
         //Panel 2
         panels[2].add(courseAndProjectTable);
         //Panel 3

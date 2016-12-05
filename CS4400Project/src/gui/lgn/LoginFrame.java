@@ -10,6 +10,7 @@ import dat.Lookups;
 import dat.UserProfile;
 import dat.obj.User;
 import gui.MainPageFrame;
+import gui.adm.ChooseFunctFrame;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -199,7 +200,11 @@ public class LoginFrame extends JFrame {
                                                 );
                     System.out.println(user.getUsername());
                             UserProfile profile = new UserProfile(user);
-                            new MainPageFrame(con, profile);
+                            if (profile.getUserType().equals("STUDENT")) {
+                                new MainPageFrame(con, profile);
+                            } else {
+                                new ChooseFunctFrame(con, profile);
+                            }
                             dispose();
                         }
                     } catch (Exception ex) {
